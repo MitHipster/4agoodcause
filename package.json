@@ -1,0 +1,30 @@
+{
+  "name": "4-a-good-cause",
+  "version": "1.0.0",
+  "description": "UNC Boot Camp Project 2 Donation Site",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MitHipster/4agoodcause.git"
+  },
+  "author": "Tim Acker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MitHipster/4agoodcause/issues"
+  },
+  "homepage": "https://github.com/MitHipster/4agoodcause#readme",
+  "dependencies": {
+    "body-parser": "^1.18.0",
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.9",
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.0"
+  }
+}
