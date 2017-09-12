@@ -72,17 +72,36 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1, 255]
       }
-    },
+    }
   });
   // Associate with another table (or model)
   Donor.associate = models => {
+    Donor.hasMany(models.Donation, {
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
+    Donor.hasOne(models.Payment, {
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
+    Donor.hasMany(models.Transaction, {
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
     Donor.belongsTo(models.State, {
       foreignKey: {
         allowNull: false,
         validate: {
           len: [2]
         }
-      }
+      },
+      onDelete: 'CASCADE'
     });
   };
 

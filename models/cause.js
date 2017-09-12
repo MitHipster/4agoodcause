@@ -16,7 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   // Associate with another table (or model)
   Cause.associate = (models) => {
     Cause.hasMany(models.Charity, {
-      onDelete: "CASCADE"
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
     });
   };
   return Cause;

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     categoryImg: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
         len: [1, 255]
@@ -23,7 +23,10 @@ module.exports = (sequelize, DataTypes) => {
   // Associate with another table (or model)
   Category.associate = (models) => {
     Category.hasMany(models.Charity, {
-      onDelete: "CASCADE"
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
     });
   };
   return Category;

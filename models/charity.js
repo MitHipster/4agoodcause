@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     // Define fields, set properties and add validation
     ein: {
       type: DataTypes.STRING(9),
+      allowNull: false,
       validate: {
         len: 9
       }
@@ -17,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     tagline: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
         len: [1, 255]
       }
     },
     url: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
         len: [1, 255]
@@ -33,15 +34,29 @@ module.exports = (sequelize, DataTypes) => {
   });
   // Associate with another table (or model)
   Charity.associate = models => {
+    Charity.hasMany(models.Donation, {
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
+    Charity.hasMany(models.Transaction, {
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
+    });
     Charity.belongsTo(models.Category, {
       foreignKey: {
         allowNull: false,
-      }
+      },
+      onDelete: 'CASCADE'
     });
     Charity.belongsTo(models.Cause, {
       foreignKey: {
         allowNull: false,
-      }
+      },
+      onDelete: 'CASCADE'
     });
   };
   return Charity;

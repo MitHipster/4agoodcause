@@ -17,6 +17,20 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1, 20]
       }
+    },
+    regionName: {
+      type: DataTypes.STRING(10),
+      allowNull: false,
+      validate: {
+        len: [1, 10]
+      }
+    },
+    divisionName: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      validate: {
+        len: [1, 20]
+      }
     }
   }, {
     timestamps: false
@@ -24,7 +38,10 @@ module.exports = (sequelize, DataTypes) => {
   // Associate with another table (or model)
   State.associate = models => {
     State.hasMany(models.Donor, {
-      onDelete: "CASCADE"
+      foreignKey: {
+        allowNull: false,
+      },
+      onDelete: 'CASCADE'
     });
   };
 
