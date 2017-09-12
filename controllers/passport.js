@@ -8,6 +8,22 @@ module.exports = (passport, donor) => {
   let Donor = donor;
   console.log(Donor);
 
+  // Used to serialize the user
+  passport.serializeUser( (donor, done) => {
+    done(null, donor.id);
+  });
+
+  // Used to deserialize the user
+  passport.deserializeUser( (id, done) => {
+    Donor.findById(id).then( donor => {
+      if (donor) {
+        done(null, donor.get());
+      } else {
+        done(donor.errors, null);
+      }
+    });
+  });
+
   // Defines custom strategy with instance of the LocalStrategy
   passport.use('local-signup', new LocalStrategy({
       usernameField: 'username',
