@@ -31,10 +31,10 @@ app.set('view engine', 'handlebars');
 app.use('/', routes);
 
 // Sync sequelize model and start express app on specified port
-db.sequelize.sync().then( () => {
+db.sequelize.sync({force: true}).then( () => {
   app.listen(port, () => {
     console.log('App listening on port ' + port);
   });
 }).catch( err => {
-  console.log(error);
+  console.log(err);
 });
