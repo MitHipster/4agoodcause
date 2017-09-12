@@ -40,7 +40,6 @@ router.post('/signin', passport.authenticate('local-signin', {
 
 // Function to check if a donor is logged in
 let isLoggedIn = (req, res, next) => {
-  console.log('Function entered');
   if (req.isAuthenticated()) return next();
   res.redirect('/signin');
 };

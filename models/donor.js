@@ -59,6 +59,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [14]
       }
     },
+    profileImg: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      validate: {
+        len: [1, 255]
+      }
+    },
     username: {
       type: DataTypes.STRING(30),
       allowNull: false,

@@ -1,7 +1,6 @@
 /*jslint esversion: 6, browser: true*/
 const bCrypt = require('bcrypt-nodejs');
 const LocalStrategy = require('passport-local').Strategy;
-// const db = require('./models');
 
 module.exports = (passport, donor) => {
   // Initialize the passport-local strategy and the donor model, which will be passed as arguments
