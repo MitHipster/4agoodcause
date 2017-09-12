@@ -2,9 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   // Set constructor equal to table definition
   const Charity = sequelize.define('Charity', {
+    // Define fields, set properties and add validation
     ein: {
       type: DataTypes.STRING(9),
-      primaryKey: true,
       validate: {
         len: 9
       }
