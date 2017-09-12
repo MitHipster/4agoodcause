@@ -31,9 +31,17 @@ router.get('/signin', (req, res) => {
   res.render('signin');
 });
 
+// Route to redirect existing signed in donor
+router.post('/signin', passport.authenticate('local-signin', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/signin'
+  }
+));
+
 // Function to check if a donor is logged in
 let isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return next;
+  console.log('Function entered');
+  if (req.isAuthenticated()) return next();
   res.redirect('/signin');
 };
 

@@ -73,4 +73,42 @@ module.exports = (passport, donor) => {
       });
     }
   ));
+
+  // Local strategy for signin
+  passport.use('local-signin', new LocalStrategy({
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true // allows us to pass back the entire request to the callback
+    }, (req, username, password, done) => {
+      let Donor = donor;
+      let isValidPassword = (userpass, password) => {
+        return bCrypt.compareSync(password, userpass);
+      };
+
+      Donor.findOne({
+        where: {
+          username: username
+        }
+      }).then( donor => {
+        if (!donor) {
+          return done(null, false, {
+            message: 'Username does not exist'
+          });
+        }
+        if (!isValidPassword(donor.password, password)) {
+          return done(null, false, {
+            message: 'Incorrect password.'
+          });
+        }
+        let donorInfo = donor.get();
+        return done(null, donorInfo);
+      }).catch(err => {
+        console.log("Error:", err);
+
+        return done(null, false, {
+          message: 'Something went wrong with the login. Please try again.'
+        });
+      });
+    }
+  ));
 };
