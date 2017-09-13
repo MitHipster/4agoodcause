@@ -55,8 +55,27 @@ h1 {
   }
 }
 
-// Form
-.container-form {
+// Container spacing
+.containers {
   margin-top: 4rem;
   margin-bottom: 4rem;
+}
+
+// Collapsible
+.collapsible {
+  .collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .category-img {
+    width: 28px;
+    height: 28px;
+    margin-right: 0.5rem;
+  }
+  .category-name {
+    flex-grow: 1;
+    font-size: 15px;
+    margin-top: 10px;
+  }
 }

@@ -21,7 +21,7 @@ router.get('/signup', (req, res) => {
 
 // Route to post new donor information
 router.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/dashboard',
+    successRedirect: '/categories',
     failureRedirect: '/signup'
   }
 ));
@@ -45,8 +45,25 @@ let isLoggedIn = (req, res, next) => {
 };
 
 // Route to redirect donor after signing in
-router.get('/dashboard', isLoggedIn, (req, res) => {
-  res.render('dashboard');
+router.get('/categories', isLoggedIn, (req, res) => {
+  db.Category.findAll({
+    order: [
+      [ 'categoryName', 'ASC' ]
+    ]
+  }).then (results => {
+    res.render('categories', {categories: results});
+  });
+});
+
+router.get('/test', (req, res) => {
+  db.Category.findAll({
+    order: [
+      [ 'categoryName', 'ASC' ]
+    ]
+  }).then (results => {
+    console.log(results);
+    res.render('categories', {categories: results});
+  });
 });
 
 // Route to logout the donor

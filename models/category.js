@@ -16,6 +16,13 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1, 255]
       }
+    },
+    categoryDesc: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      validate: {
+        len: [1, 255]
+      }
     }
   }, {
     timestamps: false
