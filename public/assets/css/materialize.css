@@ -1979,7 +1979,7 @@ a {
 .clearfix {
   clear: both; }
 
-.z-depth-0 {
+.z-depth-0, .section .card {
   box-shadow: none !important; }
 
 .z-depth-1, nav, .card-panel, .card, .btn, .btn-large, .btn-floating, .side-nav {
@@ -1988,7 +1988,7 @@ a {
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2); }
 
-.z-depth-2, .section .card {
+.z-depth-2 {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3); }
 
 .z-depth-3 {
@@ -5118,5 +5118,8 @@ main {
     margin-bottom: 1.5rem; }
     .section .card .card-title i, .section .card .card-title span {
       font-size: 2.5rem; }
+
+.container-form {
+  margin-top: 4rem; }
 
 /*# sourceMappingURL=materialize.css.map */

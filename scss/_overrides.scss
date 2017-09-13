@@ -37,7 +37,7 @@ h1 {
 .section {
   .card {
     margin-top: 3rem;
-    @extend .z-depth-2;
+    @extend .z-depth-0;
     .card-content {
       p {
         font-size: 1.2rem;
@@ -53,4 +53,9 @@ h1 {
       }
     }
   }
+}
+
+// Form
+.container-form {
+  margin-top: 4rem;
 }
