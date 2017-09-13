@@ -40,7 +40,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <select id="state" class="validate">
+          <select id="StateAbbrev" name="StateAbbrev" class="validate">
             <option value="" disabled selected>Select State</option>
           	<option value="AL">Alabama</option>
           	<option value="AK">Alaska</option>
@@ -93,7 +93,7 @@
           	<option value="WI">Wisconsin</option>
           	<option value="WY">Wyoming</option>
           </select>
-          <label for="state">State</label>
+          <label for="StateAbbrev">State</label>
         </div>
       </div>
       <div class="row">
@@ -112,6 +112,12 @@
         <div class="input-field col s12">
           <input id="phone" name="phone" type="text" class="validate">
           <label for="phone">Phone</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="profileImg" name="profileImg" type="url" class="validate" pattern="https?://.+" title="Include http:// or https://">
+          <label for="profileImg">Profile Image Link</label>
         </div>
       </div>
       <div class="row">

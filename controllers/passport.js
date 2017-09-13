@@ -55,6 +55,7 @@ module.exports = (passport, donor) => {
             locationZip: req.body.locationZip,
             email: req.body.email,
             phone: req.body.phone,
+            profileImg: req.body.profileImg,
             username: username,
             password: hashPassword
           };
