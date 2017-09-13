@@ -6,4 +6,6 @@ $(document).ready(function () {
   });
   // Initialize parallax effect
   $('.parallax').parallax();
+  // Initialize select state dropdown
+  $('select').material_select();
 });
