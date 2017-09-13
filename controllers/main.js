@@ -11,7 +11,7 @@ const request = require('request');
 
 // Route to get all 4-star causes for donor to choose from
 router.get('/', (req, res) => {
-  res.end('Hello');
+  res.render('index');
 });
 
 // Route to signup a new donor

@@ -18,7 +18,8 @@ html{
     font-size: 15px;
   }
 
-  font-family: "Roboto", sans-serif;
+  // font-family: "Roboto", sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-weight: normal;
   color: $off-black;
 }
@@ -39,7 +40,8 @@ h6 { font-size: $h6-fontsize; line-height: 110%; margin: ($h6-fontsize / 2) 0 ($
 // Text Styles
 em { font-style: italic; }
 strong { font-weight: 500; }
-small { font-size: 75%; }
+// small { font-size: 75%; }
+small { font-size: 90%; }
 .light { font-weight: 300; }
 .thin { font-weight: 200; }
 
