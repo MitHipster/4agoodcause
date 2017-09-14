@@ -5243,8 +5243,8 @@ main {
   justify-content: space-between;
   align-items: center; }
 .collapsible .category-img {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   margin-right: 0.5rem; }
 .collapsible .category-name {
   flex-grow: 1;

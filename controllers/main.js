@@ -51,20 +51,32 @@ router.get('/categories', isLoggedIn, (req, res) => {
       [ 'categoryName', 'ASC' ]
     ]
   }).then (results => {
+    console.log(results);
     res.render('categories', {categories: results});
   });
 });
-
-router.get('/test', (req, res) => {
+ //************************************************
+router.get('/categoriestest', (req, res) => {
   db.Category.findAll({
     order: [
       [ 'categoryName', 'ASC' ]
     ]
   }).then (results => {
-    console.log(results);
     res.render('categories', {categories: results});
   });
 });
+router.post('/api/charities', (req, res) => {
+  db.Category.find({
+    where: {
+      id: req.body.ids
+    }
+  }).then (results => {
+    console.log(results);
+    // res.render('categories', {categories: results});
+    res.send({redirect: '/'});
+  });
+});
+//************************************************
 
 // Route to logout the donor
 router.get('/logout', (req, res) => {

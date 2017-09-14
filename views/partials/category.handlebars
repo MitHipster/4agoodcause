@@ -1,7 +1,7 @@
 <main class="container containers">
   <div class="row">
-    <div class="col l6 s12 offset-l3">
-      <form id="category-form">
+    <div >
+      <form class="col s12 m6 offset-m3" id="category-form" name="category-form" method="post" action="">
         <ul class="collapsible popout" data-collapsible="accordion">
           {{#each categories}}
           <li>
@@ -11,7 +11,7 @@
                 {{~this.categoryName~}}
               </p>
               <p>
-                <input type="checkbox" class="filled-in" id="category-{{~this.id~}}" data-category="{{~this.id~}}">
+                <input type="checkbox" class="filled-in category-checkbox" id="category-{{~this.id~}}" data-category="{{~this.id~}}">
                 <label for="category-{{~this.id~}}"></label>
               </p>
             </div>
@@ -20,6 +20,7 @@
           </li>
           {{/each}}
         </ul>
+        <button class="btn waves-effect waves-light" type="submit">View Charities</button>
       </form>
     </div>
   </div>
