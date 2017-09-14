@@ -86,6 +86,7 @@ router.get('/donations', (req, res) => {
   }).then (results => {
     console.log(results);
     res.render('donations', {donations: results});
+    charityIds = [];
   });
 });
 
