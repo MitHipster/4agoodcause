@@ -9,6 +9,7 @@ const router = express.Router();
 // Use request method to get API data to pipe to response
 const request = require('request');
 let categoryIds = [];
+let charityIds = [];
 
 // Route to get all 4-star causes for donor to choose from
 router.get('/', (req, res) => {
@@ -105,6 +106,11 @@ router.get('/logout', (req, res) => {
 router.post('/api/charities', (req, res) => {
   categoryIds = req.body.ids.map(Number);
   res.send({redirect: '/charitiestest'});
+});
+
+router.post('/api/donate', (req, res) => {
+  charityIds = req.body.ids.map(Number);
+  res.send({redirect: '/donatetest'});
 });
 
 //*************************************************

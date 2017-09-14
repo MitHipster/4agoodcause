@@ -12,20 +12,32 @@ $(document).ready(function () {
 });
 
 const $categoryForm = $('#category-form');
+const $charityForm = $('#charity-form');
 const $categoryChecks = $('.category-checkbox');
+const $charityChecks = $('.charity-checkbox');
+
 // Return selected categories for charities search request
 $('#category-form').submit( e => {
   e.preventDefault();
+  ajaxRequest($categoryChecks, 'category', '/api/charities');
+});
+
+$('#charity-form').submit( e => {
+  e.preventDefault();
+  ajaxRequest($charityChecks, 'charity', '/api/donate');
+});
+
+let ajaxRequest = (checkboxes, attr, url) => {
   let data = {
     ids: []
   };
-  $categoryChecks.each( (i, input) => {
+  checkboxes.each( (i, input) => {
     if (input.checked) {
-      data.ids.push(parseInt($(input).data('category')));
+      data.ids.push(parseInt($(input).data(attr)));
     }
   });
   $.ajax({
-    url: '/api/charities',
+    url: url,
     type: 'POST',
     data: data,
     dataType: 'json'
@@ -34,4 +46,4 @@ $('#category-form').submit( e => {
       window.location = result.redirect;
     }
   });
-});
+};
