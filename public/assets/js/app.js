@@ -27,7 +27,8 @@ $('#category-form').submit( e => {
   $.ajax({
     url: '/api/charities',
     type: 'POST',
-    data: data
+    data: data,
+    dataType: 'json'
   }).done( result => {
     if (typeof result.redirect == 'string') {
       window.location = result.redirect;

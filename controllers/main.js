@@ -8,6 +8,7 @@ const db = require('../models');
 const router = express.Router();
 // Use request method to get API data to pipe to response
 const request = require('request');
+let categoryIds = [];
 
 // Route to get all 4-star causes for donor to choose from
 router.get('/', (req, res) => {
@@ -44,7 +45,7 @@ let isLoggedIn = (req, res, next) => {
   res.redirect('/signin');
 };
 
-// Route to redirect donor after signing in
+// Route to redirect donor to select categories after signing up
 router.get('/categories', isLoggedIn, (req, res) => {
   db.Category.findAll({
     order: [
@@ -55,7 +56,61 @@ router.get('/categories', isLoggedIn, (req, res) => {
     res.render('categories', {categories: results});
   });
 });
- //************************************************
+
+// Route to display a filtered charities list based on selected categories
+router.get('/charities', isLoggedIn, (req, res) => {
+  db.Category.findAll({
+    order: [
+      [ 'categoryName', 'ASC' ]
+    ]
+  }).then (results => {
+    res.render('categories', {categories: results});
+  });
+});
+
+router.get('/charitiestest', (req, res) => {
+  db.Category.findAll({
+    include: [
+    {
+      model: db.Charity,
+      include: [
+        db.Cause
+      ]
+    }
+  ],
+    where: {
+      id: categoryIds
+    },
+    order: [
+      [ 'categoryName', 'ASC' ],
+      [ {model: db.Charity}, 'charityName', 'ASC' ]
+    ]
+  }).then (results => {
+    res.render('charities', {charities: results});
+    categoryIds = [];
+  });
+});
+
+// Route to logout the donor
+router.get('/logout', (req, res) => {
+  req.session.destroy( err => {
+    res.redirect('/');
+  });
+});
+
+//*************************************************
+// API Routes
+//*************************************************
+
+router.post('/api/charities', (req, res) => {
+  categoryIds = req.body.ids.map(Number);
+  res.send({redirect: '/charitiestest'});
+});
+
+//*************************************************
+// Test Routes
+//*************************************************
+
 router.get('/categoriestest', (req, res) => {
   db.Category.findAll({
     order: [
@@ -65,23 +120,27 @@ router.get('/categoriestest', (req, res) => {
     res.render('categories', {categories: results});
   });
 });
-router.post('/api/charities', (req, res) => {
-  db.Category.find({
-    where: {
-      id: req.body.ids
-    }
-  }).then (results => {
-    console.log(results);
-    // res.render('categories', {categories: results});
-    res.send({redirect: '/'});
-  });
-});
-//************************************************
 
-// Route to logout the donor
-router.get('/logout', (req, res) => {
-  req.session.destroy( err => {
-    res.redirect('/');
+router.get('/charitiestest', (req, res) => {
+  db.Category.findAll({
+    include: [
+    {
+      model: db.Charity,
+      include: [
+        db.Cause
+      ]
+    }
+  ],
+    where: {
+      id: categoryIds
+    },
+    order: [
+      [ 'categoryName', 'ASC' ],
+      [ {model: db.Charity}, 'charityName', 'ASC' ]
+    ]
+  }).then (results => {
+    res.render('charities', {charities: results});
+    categoryIds = [];
   });
 });
 

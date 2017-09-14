@@ -1,27 +1,25 @@
 <main class="container containers">
   <div class="row">
-    <div >
-      <form class="col s12 m6 offset-m3" id="category-form" name="category-form" method="post" action="">
-        <ul class="collapsible popout" data-collapsible="accordion">
-          {{#each categories}}
-          <li>
-            <div class="collapsible-header">
-              <img class="category-img" src="{{~this.categoryImg~}}" alt="">
-              <p class="category-name">
-                {{~this.categoryName~}}
-              </p>
-              <p>
-                <input type="checkbox" class="filled-in category-checkbox" id="category-{{~this.id~}}" data-category="{{~this.id~}}">
-                <label for="category-{{~this.id~}}"></label>
-              </p>
-            </div>
-            <div class="collapsible-body"><span>{{~this.categoryDesc~}}</span>
-            </div>
-          </li>
-          {{/each}}
-        </ul>
-        <button class="btn waves-effect waves-light" type="submit">View Charities</button>
-      </form>
-    </div>
+    <form class="col s12 m8 offset-m2" id="category-form" name="category-form" method="post" action="">
+      <ul class="collapsible" data-collapsible="accordion">
+        {{#each categories}}
+        <li>
+          <div class="collapsible-header">
+            <img class="category-img" src="{{~this.categoryImg~}}" alt="">
+            <p class="category-name">
+              {{~this.categoryName~}}
+            </p>
+            <p>
+              <input type="checkbox" class="filled-in category-checkbox" id="category-{{~this.id~}}" data-category="{{~this.id~}}">
+              <label for="category-{{~this.id~}}"></label>
+            </p>
+          </div>
+          <div class="collapsible-body"><span>{{~this.categoryDesc~}}</span>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      <button class="btn waves-effect waves-light" type="submit">View Charities</button>
+    </form>
   </div>
 </main>

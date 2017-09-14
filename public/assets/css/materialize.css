@@ -5238,17 +5238,40 @@ main {
   margin-top: 4rem;
   margin-bottom: 4rem; }
 
+.category-img {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.75rem; }
+
 .collapsible .collapsible-header {
   display: flex;
   justify-content: space-between;
   align-items: center; }
-.collapsible .category-img {
-  width: 32px;
-  height: 32px;
-  margin-right: 0.5rem; }
+.collapsible .collapsible-body {
+  font-size: 1.15rem; }
 .collapsible .category-name {
   flex-grow: 1;
-  font-size: 15px;
+  font-size: 1.5rem;
   margin-top: 10px; }
+
+.collection .collection-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; }
+  .collection .collection-header h5 {
+    font-size: 1.5rem; }
+.collection .collection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 25px !important; }
+  .collection .collection-item .title {
+    font-size: 1.2rem; }
+  .collection .collection-item .charity-tagline {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 1rem; }
+  .collection .collection-item .charity-cause {
+    color: #757575; }
 
 /*# sourceMappingURL=materialize.css.map */

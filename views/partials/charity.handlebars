@@ -1,0 +1,28 @@
+<main class="container containers">
+  <div class="row">
+    <form class="col s12 m8 offset-m2" id="charity-form" name="charity-form" method="post" action="">
+      <ul class="collection with-header">
+        {{#each charities}}
+          <li class="collection-header">
+            <img class="category-img" src="{{~this.categoryImg~}}" alt="">
+            <h5>{{~this.categoryName~}}</h5>
+          </li>
+          {{#each this.Charities}}
+            <li class="collection-item">
+              <div>
+                <span class="title"><a href="{{~this.url~}}" target="_blank"><strong>{{~this.charityName~}}</a></strong></span>
+                <p class="charity-tagline"><em>{{~this.tagline~}}</em></p>
+                <p class="charity-cause">Cause: {{this.Cause.causeName~}}</p>
+              </div>
+              <p>
+                <input type="checkbox" class="filled-in charity-checkbox" id="charity-{{~this.id~}}" data-charity="{{~this.id~}}">
+                <label for="charity-{{~this.id~}}"></label>
+              </p>
+            </li>
+          {{/each}}
+        {{/each}}
+      </ul>
+      <button class="btn waves-effect waves-light" type="submit">Donate!</button>
+    </form>
+  </div>
+</main>
