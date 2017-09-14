@@ -1,0 +1,41 @@
+<main class="container containers">
+  <div class="row">
+    <form class="col s12 m8 offset-m2" id="payment-form" name="payment-form" method="post" action="">
+      <div class="row">
+        <div class="input-field col s12">
+          <select id="cardName" name="cardName" class="validate">
+            <option value="" disabled selected>Select Card</option>
+          	<option value="American Express">American Express</option>
+          	<option value="Discover">Discover</option>
+          	<option value="Mastercard">Mastercard</option>
+          	<option value="Mastercard Debit">Mastercard Debit</option>
+          	<option value="Visa">Visa</option>
+          	<option value="Visa Debit">Visa Debit</option>
+          </select>
+          <label for="cardName">Card Type</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s8">
+          <input id="cardNumber" name="cardNumber" type="text" class="validate">
+          <label for="cardNumber">Card Number</label>
+        </div>
+        <div class="input-field col s3 offset-s1">
+          <input id="cvc" name="cvc" type="text" class="validate">
+          <label for="cvc">CVC</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s5">
+          <input id="expireMth" name="expireMth" type="text" class="validate">
+          <label for="expireMth">Exp Month</label>
+        </div>
+        <div class="input-field col s6 offset-s1">
+          <input id="expireYr" name="expireYr" type="text" class="validate">
+          <label for="expireYr">Exp Year (4 digits)</label>
+        </div>
+      </div>
+      <input class="btn waves-effect waves-light" type="submit" value="Submit">
+    </form>
+  </div>
+</main>

@@ -47,41 +47,25 @@ let isLoggedIn = (req, res, next) => {
 };
 
 // Route to redirect donor to select categories after signing up
-router.get('/categories', isLoggedIn, (req, res) => {
+// router.get('/categories', isLoggedIn, (req, res) => {
+router.get('/categories', (req, res) => {
   db.Category.findAll({
     order: [
       [ 'categoryName', 'ASC' ]
     ]
   }).then (results => {
-    console.log(results);
     res.render('categories', {categories: results});
   });
 });
 
 // Route to display a filtered charities list based on selected categories
-router.get('/charities', isLoggedIn, (req, res) => {
-  db.Category.findAll({
-    order: [
-      [ 'categoryName', 'ASC' ]
-    ]
-  }).then (results => {
-    res.render('categories', {categories: results});
-  });
-});
-
-router.get('/charitiestest', (req, res) => {
+// router.get('/charities', isLoggedIn, (req, res) => {
+router.get('/charities', (req, res) => {
   db.Category.findAll({
     include: [
-    {
-      model: db.Charity,
-      include: [
-        db.Cause
-      ]
-    }
+    { model: db.Charity, include: [db.Cause] }
   ],
-    where: {
-      id: categoryIds
-    },
+    where: { id: categoryIds },
     order: [
       [ 'categoryName', 'ASC' ],
       [ {model: db.Charity}, 'charityName', 'ASC' ]
@@ -89,6 +73,19 @@ router.get('/charitiestest', (req, res) => {
   }).then (results => {
     res.render('charities', {charities: results});
     categoryIds = [];
+  });
+});
+
+// router.get('/donatetest', isLoggedIn, (req, res) => {
+router.get('/donations', (req, res) => {
+  db.Charity.findAll({
+    where: { id: charityIds },
+    order: [
+      [ 'charityName', 'ASC' ]
+    ]
+  }).then (results => {
+    console.log(results);
+    res.render('donations', {donations: results});
   });
 });
 
@@ -105,49 +102,12 @@ router.get('/logout', (req, res) => {
 
 router.post('/api/charities', (req, res) => {
   categoryIds = req.body.ids.map(Number);
-  res.send({redirect: '/charitiestest'});
+  res.send({redirect: '/charities'});
 });
 
-router.post('/api/donate', (req, res) => {
+router.post('/api/donations', (req, res) => {
   charityIds = req.body.ids.map(Number);
-  res.send({redirect: '/donatetest'});
-});
-
-//*************************************************
-// Test Routes
-//*************************************************
-
-router.get('/categoriestest', (req, res) => {
-  db.Category.findAll({
-    order: [
-      [ 'categoryName', 'ASC' ]
-    ]
-  }).then (results => {
-    res.render('categories', {categories: results});
-  });
-});
-
-router.get('/charitiestest', (req, res) => {
-  db.Category.findAll({
-    include: [
-    {
-      model: db.Charity,
-      include: [
-        db.Cause
-      ]
-    }
-  ],
-    where: {
-      id: categoryIds
-    },
-    order: [
-      [ 'categoryName', 'ASC' ],
-      [ {model: db.Charity}, 'charityName', 'ASC' ]
-    ]
-  }).then (results => {
-    res.render('charities', {charities: results});
-    categoryIds = [];
-  });
+  res.send({redirect: '/donations'});
 });
 
 // Export routes for server.js to use

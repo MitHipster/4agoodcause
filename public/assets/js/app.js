@@ -24,7 +24,7 @@ $('#category-form').submit( e => {
 
 $('#charity-form').submit( e => {
   e.preventDefault();
-  ajaxRequest($charityChecks, 'charity', '/api/donate');
+  ajaxRequest($charityChecks, 'charity', '/api/donations');
 });
 
 let ajaxRequest = (checkboxes, attr, url) => {

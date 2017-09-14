@@ -1,0 +1,23 @@
+<main class="container containers">
+  <div class="row">
+    <form class="col s12 m8 offset-m2" id="payment-form" name="payment-form" method="post" action="">
+      <ul class="collection with-header">
+        <li class="collection-header">
+          <h5>Your Selected Charities</h5>
+        </li>
+        {{#each donations}}
+          <li class="collection-item">
+            <div>
+              <span class="title"><a href="{{~this.url~}}" target="_blank"><strong>{{~this.charityName~}}</a></strong></span>
+              <p class="charity-tagline"><em>{{~this.tagline~}}</em></p>
+            </div>
+            <div>$
+              <input id="donation-{{~this.id~}}" name="amount" type="text" class="validate donation-amount" data-charity="{{~this.id~}}">
+              <label for="donation-{{~this.id~}}">Amount</label>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </form>
+  </div>
+</main>

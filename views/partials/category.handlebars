@@ -4,7 +4,7 @@
       <ul class="collapsible" data-collapsible="accordion">
         {{#each categories}}
         <li>
-          <div class="collapsible-header">
+          <div class="collapsible-header {{#if @first}}active{{/if}}">
             <img class="category-img" src="{{~this.categoryImg~}}" alt="">
             <p class="category-name">
               {{~this.categoryName~}}
