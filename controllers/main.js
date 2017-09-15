@@ -47,8 +47,8 @@ let isLoggedIn = (req, res, next) => {
 };
 
 // Route to redirect donor to select categories after signing up
-// router.get('/categories', isLoggedIn, (req, res) => {
-router.get('/categories', (req, res) => {
+router.get('/categories', isLoggedIn, (req, res) => {
+// router.get('/categories', (req, res) => {
   db.Category.findAll({
     order: [
       [ 'categoryName', 'ASC' ]
@@ -59,8 +59,8 @@ router.get('/categories', (req, res) => {
 });
 
 // Route to display a filtered charities list based on selected categories
-// router.get('/charities', isLoggedIn, (req, res) => {
-router.get('/charities', (req, res) => {
+router.get('/charities', isLoggedIn, (req, res) => {
+// router.get('/charities', (req, res) => {
   db.Category.findAll({
     include: [
     { model: db.Charity, include: [db.Cause] }
@@ -76,8 +76,9 @@ router.get('/charities', (req, res) => {
   });
 });
 
-// router.get('/donatetest', isLoggedIn, (req, res) => {
-router.get('/donations', (req, res) => {
+// Route to display selected charities and payment form
+router.get('/donations', isLoggedIn, (req, res) => {
+// router.get('/donations', (req, res) => {
   db.Charity.findAll({
     where: { id: charityIds },
     order: [
@@ -90,6 +91,20 @@ router.get('/donations', (req, res) => {
   });
 });
 
+// Route to display user profile information
+router.get('/dashboard', isLoggedIn, (req, res) => {
+// router.get('/dashboard', (req, res) => {
+  // db.Donor.findOne({
+  //   where: { id: 1 }
+  // }).then( results => {
+  //   console.log(results);
+  //   res.end();
+  // });
+  console.log(req.user);
+  console.log(res.user);
+  res.render('dashboard');
+});
+
 // Route to logout the donor
 router.get('/logout', (req, res) => {
   req.session.destroy( err => {
@@ -100,6 +115,8 @@ router.get('/logout', (req, res) => {
 //*************************************************
 // API Routes
 //*************************************************
+
+// ********* STORE IDS IN TEMPORARY TABLE INSTEAD OF GLOBAL VARIABLES *********
 
 router.post('/api/charities', (req, res) => {
   categoryIds = req.body.ids.map(Number);

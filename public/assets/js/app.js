@@ -9,6 +9,20 @@ $(document).ready(function () {
   $('.parallax').parallax();
   // Initialize select state dropdown
   $('select').material_select();
+  // for HTML5 "required" attribute
+  $('select[required]').css({
+      display: 'inline',
+      position: 'absolute',
+      float: 'left',
+      padding: 0,
+      margin: 0,
+      border: '1px solid rgba(255,255,255,0)',
+      height: 0,
+      width: 0,
+      top: '2em',
+      left: '3em',
+      opacity: 0
+    });
 });
 
 const $categoryForm = $('#category-form');
@@ -17,12 +31,13 @@ const $categoryChecks = $('.category-checkbox');
 const $charityChecks = $('.charity-checkbox');
 
 // Return selected categories for charities search request
-$('#category-form').submit( e => {
+$categoryForm.submit( e => {
   e.preventDefault();
   ajaxRequest($categoryChecks, 'category', '/api/charities');
 });
 
-$('#charity-form').submit( e => {
+// Return selected charities to make a donation
+$charityForm.submit( e => {
   e.preventDefault();
   ajaxRequest($charityChecks, 'charity', '/api/donations');
 });

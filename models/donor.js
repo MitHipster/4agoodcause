@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     locationZip: {
-      type: DataTypes.STRING(5),
+      type: DataTypes.CHAR(5),
       allowNull: false,
       validate: {
         len: [5]
@@ -53,10 +53,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     phone: {
-      type: DataTypes.CHAR(14),
+      type: DataTypes.CHAR(12),
       allowNull: false,
       validate: {
-        len: [14]
+        len: [12]
       }
     },
     profileImg: {

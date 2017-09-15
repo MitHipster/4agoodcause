@@ -12,7 +12,7 @@
               <p class="charity-tagline"><em>{{~this.tagline~}}</em></p>
             </div>
             <div class="input-field col s2">
-              <input id="donation-{{~this.id~}}" name="amount" type="number" step="0.01" class="validate donation-amount" data-charity="{{~this.id~}}">
+              <input id="donation-{{~this.id~}}" name="amount" type="number" step="0.01" class="validate donation-amount" data-charity="{{~this.id~}}" required>
               <label for="donation-{{~this.id~}}">$ Amt</label>
             </div>
           </li>
@@ -20,7 +20,7 @@
       </ul>
       <div class="row payment-section">
         <div class="input-field col s12">
-          <select id="cardName" name="cardName" class="validate">
+          <select id="cardName" name="cardName" class="validate" required>
             <option value="" disabled selected>Select Card</option>
           	<option value="American Express">American Express</option>
           	<option value="Discover">Discover</option>
@@ -34,22 +34,50 @@
       </div>
       <div class="row">
         <div class="input-field col s8">
-          <input id="cardNumber" name="cardNumber" type="text" class="validate">
+          <input id="cardNumber" name="cardNumber" type="text" class="validate" pattern="[0-9]{14,16}" required>
           <label for="cardNumber">Card Number</label>
         </div>
         <div class="input-field col s3 offset-s1">
-          <input id="cvc" name="cvc" type="text" class="validate">
+          <input id="cvc" name="cvc" type="text" class="validate" pattern="[0-9]{3}" required>
           <label for="cvc">CVC</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s5">
-          <input id="expireMth" name="expireMth" type="text" class="validate">
+          <select id="expireMth" name="expireMth" class="validate" required>
+            <option value="" disabled selected>MM</option>
+          	<option value="01">01</option>
+          	<option value="02">02</option>
+          	<option value="03">03</option>
+          	<option value="04">04</option>
+          	<option value="05">05</option>
+          	<option value="06">06</option>
+          	<option value="07">07</option>
+          	<option value="08">08</option>
+          	<option value="09">09</option>
+          	<option value="10">10</option>
+          	<option value="11">11</option>
+          	<option value="12">12</option>
+          </select>
           <label for="expireMth">Exp Month</label>
         </div>
         <div class="input-field col s6 offset-s1">
-          <input id="expireYr" name="expireYr" type="text" class="validate">
-          <label for="expireYr">Exp Year (4 digits)</label>
+          <select id="expireYr" name="expireYr" class="validate" required>
+            <option value="" disabled selected>YYYY</option>
+          	<option value="2017">2017</option>
+          	<option value="2018">2018</option>
+          	<option value="2019">2019</option>
+          	<option value="2020">2020</option>
+          	<option value="2021">2021</option>
+          	<option value="2022">2022</option>
+          	<option value="2023">2023</option>
+          	<option value="2024">2024</option>
+          	<option value="2025">2025</option>
+          	<option value="2026">2026</option>
+          	<option value="2027">2027</option>
+          	<option value="2028">2028</option>
+          </select>
+          <label for="expireYr">Exp Year</label>
         </div>
       </div>
       <input class="btn waves-effect waves-light" type="submit" value="Submit">
