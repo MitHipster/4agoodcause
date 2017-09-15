@@ -5274,4 +5274,11 @@ main {
   .collection .collection-item .charity-cause {
     color: #757575; }
 
+.col.s10.charity-tagline {
+  padding-left: 0;
+  padding-right: 0; }
+
+.payment-section {
+  margin-top: 4rem; }
+
 /*# sourceMappingURL=materialize.css.map */

@@ -7,22 +7,18 @@
         </li>
         {{#each donations}}
           <li class="collection-item">
-            <div class="col s10">
+            <div class="col s10 charity-tagline">
               <span class="title"><a href="{{~this.url~}}" target="_blank"><strong>{{~this.charityName~}}</a></strong></span>
               <p class="charity-tagline"><em>{{~this.tagline~}}</em></p>
             </div>
             <div class="input-field col s2">
-              <input id="donation-{{~this.id~}}" name="amount" type="number" class="validate donation-amount" data-charity="{{~this.id~}}">
+              <input id="donation-{{~this.id~}}" name="amount" type="number" step="0.01" class="validate donation-amount" data-charity="{{~this.id~}}">
               <label for="donation-{{~this.id~}}">$ Amt</label>
             </div>
           </li>
         {{/each}}
       </ul>
-    </form>
-  </div>
-  <div class="row">
-    <form class="col s12 m8 offset-m2" id="payment-form" name="payment-form" method="post" action="">
-      <div class="row">
+      <div class="row payment-section">
         <div class="input-field col s12">
           <select id="cardName" name="cardName" class="validate">
             <option value="" disabled selected>Select Card</option>
