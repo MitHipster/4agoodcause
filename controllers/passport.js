@@ -25,10 +25,10 @@ module.exports = (passport, donor) => {
 
   // Defines custom strategy with instance of the LocalStrategy
   passport.use('local-signup', new LocalStrategy({
-      usernameField: 'username',
+      usernameField: 'email',
       passwordField: 'password',
       passReqToCallback: true // allows us to pass back the entire request to the callback
-    }, (req, username, password, done) => {
+    }, (req, email, password, done) => {
       // Add hashed password generating function inside callback function.
       let generateHash = password => {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
@@ -36,7 +36,7 @@ module.exports = (passport, donor) => {
       // Check to see if donor already exists, if not add as new donor
       Donor.findOne({
         where: {
-          username: username
+          email: email
         }
       }).then( donor => {
         if (donor) {
@@ -53,10 +53,9 @@ module.exports = (passport, donor) => {
             locationCity: req.body.locationCity,
             StateAbbrev: req.body.StateAbbrev,
             locationZip: req.body.locationZip,
-            email: req.body.email,
             phone: req.body.phone,
             profileImg: req.body.profileImg,
-            username: username,
+            email: email,
             password: hashPassword
           };
           console.log(data);
@@ -76,10 +75,10 @@ module.exports = (passport, donor) => {
 
   // Local strategy for signin
   passport.use('local-signin', new LocalStrategy({
-      usernameField: 'username',
+      usernameField: 'email',
       passwordField: 'password',
       passReqToCallback: true // allows us to pass back the entire request to the callback
-    }, (req, username, password, done) => {
+    }, (req, email, password, done) => {
       let Donor = donor;
       let isValidPassword = (userpass, password) => {
         return bCrypt.compareSync(password, userpass);
@@ -87,12 +86,12 @@ module.exports = (passport, donor) => {
 
       Donor.findOne({
         where: {
-          username: username
+          email: email
         }
       }).then( donor => {
         if (!donor) {
           return done(null, false, {
-            message: 'Username does not exist'
+            message: 'Email address does not exist'
           });
         }
         if (!isValidPassword(donor.password, password)) {

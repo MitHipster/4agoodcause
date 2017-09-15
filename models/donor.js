@@ -45,13 +45,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [5]
       }
     },
-    email: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      validate: {
-        len: [1, 50]
-      }
-    },
     phone: {
       type: DataTypes.CHAR(12),
       allowNull: false,
@@ -66,11 +59,11 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 255]
       }
     },
-    username: {
-      type: DataTypes.STRING(30),
+    email: {
+      type: DataTypes.STRING(50),
       allowNull: false,
       validate: {
-        len: [1, 30]
+        len: [1, 50]
       }
     },
     password: {
