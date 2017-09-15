@@ -35,7 +35,7 @@ router.get('/signin', (req, res) => {
 
 // Route to redirect existing signed in donor
 router.post('/signin', passport.authenticate('local-signin', {
-    successRedirect: '/dashboard',
+    successRedirect: '/account',
     failureRedirect: '/signin'
   }
 ));
@@ -85,14 +85,13 @@ router.get('/donations', isLoggedIn, (req, res) => {
       [ 'charityName', 'ASC' ]
     ]
   }).then (results => {
-    console.log(results);
     res.render('donations', {donations: results});
     charityIds = [];
   });
 });
 
 // Route to display user profile information
-router.get('/dashboard', isLoggedIn, (req, res) => {
+router.get('/account', isLoggedIn, (req, res) => {
 // router.get('/dashboard', (req, res) => {
   // db.Donor.findOne({
   //   where: { id: 1 }
@@ -100,9 +99,8 @@ router.get('/dashboard', isLoggedIn, (req, res) => {
   //   console.log(results);
   //   res.end();
   // });
-  console.log(req.user);
-  console.log(res.user);
-  res.render('dashboard');
+  // console.log(req.user);
+  res.render('account', {account: req.user});
 });
 
 // Route to logout the donor
@@ -126,6 +124,39 @@ router.post('/api/charities', (req, res) => {
 router.post('/api/donations', (req, res) => {
   charityIds = req.body.ids.map(Number);
   res.send({redirect: '/donations'});
+});
+
+router.post('/api/payments', (req, res) => {
+  console.log(req.user);
+  console.log(req.body);
+  // Create array to store donations to be inserted into Donations and Transactions tables
+  let donations = [];
+  // Create payment record in Payments table
+  db.Payment.create({
+    cardName: req.body.cardName,
+    cardNumber: req.body.cardNumber,
+    cardToken: 'tok_test',
+    expireMth: req.body.expireMth,
+    expireYr: req.body.expireYr,
+    cvc: req.body.cvc,
+    DonorId: req.user.id
+  }).then( (results) => {
+    // Build donations array from post data
+    req.body.amount.forEach( (amt, i) => {
+      donations.push({
+        amount: amt,
+        CharityId: req.body.CharityId[i],
+        DonorId: req.user.id,
+        PaymentId: results.id
+      });
+    });
+    // Bulk insert donations into Donations table
+    db.Donation.bulkCreate(donations).then( () => {
+      db.Transaction.bulkCreate(donations).then ( () => {
+        res.send({redirect: '/account'});
+      });
+    });
+  });
 });
 
 // Export routes for server.js to use

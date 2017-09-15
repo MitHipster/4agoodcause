@@ -5,7 +5,6 @@ const LocalStrategy = require('passport-local').Strategy;
 module.exports = (passport, donor) => {
   // Initialize the passport-local strategy and the donor model, which will be passed as arguments
   let Donor = donor;
-  console.log(Donor);
 
   // Used to serialize the user
   passport.serializeUser( (donor, done) => {
@@ -58,7 +57,6 @@ module.exports = (passport, donor) => {
             email: email,
             password: hashPassword
           };
-          console.log(data);
 
           Donor.create(data).then( (newDonor, created) => {
             if (!newDonor) {
