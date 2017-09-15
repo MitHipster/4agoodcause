@@ -2,6 +2,7 @@
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 
 // Setup express to use passport
 app.use(session({ secret: 'rhino cupcake',resave: true, saveUninitialized:true})); // session secret
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

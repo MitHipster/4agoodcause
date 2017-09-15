@@ -18,27 +18,37 @@ router.get('/', (req, res) => {
 
 // Route to signup a new donor
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  res.render('signup', {message: req.flash('err')});
 });
 
 // Route to post new donor information
 router.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/categories',
-    failureRedirect: '/signup'
+    failureRedirect: '/signup_err'
   }
 ));
 
+router.get('/signup_err', (req, res) => {
+  req.flash('err', 'An account already exists with this email address. Please sign in or try a different email address.');
+  res.redirect('/signup');
+});
+
 // Route to signin an existing donor
 router.get('/signin', (req, res) => {
-  res.render('signin');
+  res.render('signin', {message: req.flash('err')});
 });
 
 // Route to redirect existing signed in donor
 router.post('/signin', passport.authenticate('local-signin', {
     successRedirect: '/account',
-    failureRedirect: '/signin'
+    failureRedirect: '/signin_err'
   }
 ));
+
+router.get('/signin_err', (req, res) => {
+  req.flash('err', 'Invalid username or password. Please try again.');
+  res.redirect('/signin');
+});
 
 // Function to check if a donor is logged in
 let isLoggedIn = (req, res, next) => {
@@ -127,8 +137,6 @@ router.post('/api/donations', (req, res) => {
 });
 
 router.post('/api/payments', (req, res) => {
-  console.log(req.user);
-  console.log(req.body);
   // Create array to store donations to be inserted into Donations and Transactions tables
   let donations = [];
   // Create payment record in Payments table
