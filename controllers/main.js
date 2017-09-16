@@ -11,14 +11,20 @@ const request = require('request');
 let categoryIds = [];
 let charityIds = [];
 
+// Function to check if a donor is logged in
+let isLoggedIn = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/signin');
+};
+
 // Route to get all 4-star causes for donor to choose from
 router.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', { content: {user: req.user} });
 });
 
 // Route to signup a new donor
 router.get('/signup', (req, res) => {
-  res.render('signup', {message: req.flash('err')});
+  res.render('signup', { content: {message: req.flash('err')} });
 });
 
 // Route to post new donor information
@@ -28,6 +34,7 @@ router.post('/signup', passport.authenticate('local-signup', {
   }
 ));
 
+// Route to create flash error message
 router.get('/signup_err', (req, res) => {
   req.flash('err', 'An account already exists with this email address. Please sign in or try a different email address.');
   res.redirect('/signup');
@@ -35,7 +42,7 @@ router.get('/signup_err', (req, res) => {
 
 // Route to signin an existing donor
 router.get('/signin', (req, res) => {
-  res.render('signin', {message: req.flash('err')});
+  res.render('signin', { content: { message: req.flash('err')} });
 });
 
 // Route to redirect existing signed in donor
@@ -45,16 +52,11 @@ router.post('/signin', passport.authenticate('local-signin', {
   }
 ));
 
+// Route to create flash error message
 router.get('/signin_err', (req, res) => {
   req.flash('err', 'Invalid username or password. Please try again.');
   res.redirect('/signin');
 });
-
-// Function to check if a donor is logged in
-let isLoggedIn = (req, res, next) => {
-  if (req.isAuthenticated()) return next();
-  res.redirect('/signin');
-};
 
 // Route to redirect donor to select categories after signing up
 router.get('/categories', isLoggedIn, (req, res) => {
@@ -64,7 +66,12 @@ router.get('/categories', isLoggedIn, (req, res) => {
       [ 'categoryName', 'ASC' ]
     ]
   }).then (results => {
-    res.render('categories', {categories: results});
+    res.render('categories', {
+      content: {
+        categories: results,
+        user: req.user
+      }
+    });
   });
 });
 
@@ -81,7 +88,12 @@ router.get('/charities', isLoggedIn, (req, res) => {
       [ {model: db.Charity}, 'charityName', 'ASC' ]
     ]
   }).then (results => {
-    res.render('charities', {charities: results});
+    res.render('charities', {
+      content: {
+        charities: results,
+        user: req.user
+      }
+    });
     categoryIds = [];
   });
 });
@@ -95,7 +107,12 @@ router.get('/donations', isLoggedIn, (req, res) => {
       [ 'charityName', 'ASC' ]
     ]
   }).then (results => {
-    res.render('donations', {donations: results});
+    res.render('donations', {
+      content: {
+        donations: results,
+        user: req.user
+      }
+    });
     charityIds = [];
   });
 });
@@ -110,7 +127,8 @@ router.get('/account', isLoggedIn, (req, res) => {
   //   res.end();
   // });
   // console.log(req.user);
-  res.render('account', {account: req.user});
+  // res.render('account', { content: {user: req.user} });
+  res.render('account');
 });
 
 // Route to logout the donor

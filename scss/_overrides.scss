@@ -13,6 +13,11 @@ h1 {
   @media #{$small-and-down} { font-size: 3rem; }
 }
 
+// Navigation
+.side-navbar-title {
+  margin-left: 1.25rem;
+}
+
 // Parallax
 .parallax-container {
   height: 400px;
