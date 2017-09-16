@@ -1,16 +1,25 @@
 <main class="container containers">
   <div class="row">
+    <div class="col s12 m6 offset-m3">
+      {{#if account.message}}
+        <blockquote class="flash-messages">
+          {{account.message}}
+        </blockquote>
+      {{/if}}
+    </div>
+  </div>
+  <div class="row">
     <div class="col s12 m9 l10">
       <div id="account-profile" class="section scrollspy">
         <ul class="collection with-header">
-          <img src="{{account.profileImg}}" alt="" class="circle profile-img">
-          <li class="collection-header account-header"><h4>{{account.nameFirst}} {{account.nameLast}}</h4></li>
-          <li class="collection-item">Street: {{account.locationStreet}}</li>
-          <li class="collection-item">City: {{account.locationCity}}</li>
-          <li class="collection-item">State: {{account.StateAbbrev}}</li>
-          <li class="collection-item">Zip Code: {{account.locationZip}}</li>
-          <li class="collection-item">Phone: {{account.phone}}</li>
-          <li class="collection-item">Email: {{account.email}}</li>
+          <img src="{{account.profile.profileImg}}" alt="" class="circle profile-img">
+          <li class="collection-header account-header"><h4>{{account.profile.nameFirst}} {{account.profile.nameLast}}</h4></li>
+          <li class="collection-item">Street: {{account.profile.locationStreet}}</li>
+          <li class="collection-item">City: {{account.profile.locationCity}}</li>
+          <li class="collection-item">State: {{account.profile.StateAbbrev}}</li>
+          <li class="collection-item">Zip Code: {{account.profile.locationZip}}</li>
+          <li class="collection-item">Phone: {{account.profile.phone}}</li>
+          <li class="collection-item">Email: {{account.profile.email}}</li>
         </ul>
       </div>
 

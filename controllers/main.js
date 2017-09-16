@@ -24,37 +24,43 @@ router.get('/', (req, res) => {
 
 // Route to signup a new donor
 router.get('/signup', (req, res) => {
-  res.render('signup', { content: {message: req.flash('err')} });
+  res.render('signup', { content: {message: req.flash('error')} });
 });
 
 // Route to post new donor information
 router.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/categories',
-    failureRedirect: '/signup_err'
+    failureRedirect: '/signup_error'
   }
 ));
 
 // Route to create flash error message
-router.get('/signup_err', (req, res) => {
-  req.flash('err', 'An account already exists with this email address. Please sign in or try a different email address.');
+router.get('/signup_error', (req, res) => {
+  req.flash('error', 'An account already exists with this email address. Please sign in or try a different email address.');
   res.redirect('/signup');
+});
+
+// Route to create flash signup message
+router.get('/signup_success', (req, res) => {
+  req.flash('success', "Donation complete! Thank you for you contribution. This is your personal home page you'll return to each time you log in.");
+  res.redirect('/account');
 });
 
 // Route to signin an existing donor
 router.get('/signin', (req, res) => {
-  res.render('signin', { content: { message: req.flash('err')} });
+  res.render('signin', { content: { message: req.flash('error')} });
 });
 
 // Route to redirect existing signed in donor
 router.post('/signin', passport.authenticate('local-signin', {
     successRedirect: '/account',
-    failureRedirect: '/signin_err'
+    failureRedirect: '/signin_error'
   }
 ));
 
 // Route to create flash error message
-router.get('/signin_err', (req, res) => {
-  req.flash('err', 'Invalid username or password. Please try again.');
+router.get('/signin_error', (req, res) => {
+  req.flash('error', 'Invalid username or password. Please try again.');
   res.redirect('/signin');
 });
 
@@ -119,19 +125,13 @@ router.get('/donations', isLoggedIn, (req, res) => {
 
 // Route to display user profile information
 router.get('/account', isLoggedIn, (req, res) => {
-// router.get('/dashboard', (req, res) => {
-  // db.Donor.findOne({
-  //   where: { id: 1 }
-  // }).then( results => {
-  //   console.log(results);
-  //   res.end();
-  // });
-  // console.log(req.user);
-  // res.render('account', { content: {user: req.user} });
   res.render('account', {
     content: {
-      account: req.user,
-      user: req.user
+      account: {
+        profile: req.user,
+        message: req.flash('success')
+      },
+      user: req.user,
     }
   });
 });
@@ -184,7 +184,7 @@ router.post('/api/payments', (req, res) => {
     // Bulk insert donations into Donations table
     db.Donation.bulkCreate(donations).then( () => {
       db.Transaction.bulkCreate(donations).then ( () => {
-        res.send({redirect: '/account'});
+        res.redirect('/signup_success');
       });
     });
   });
