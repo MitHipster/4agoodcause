@@ -56,6 +56,13 @@ h1 {
       i, span {
         font-size: 2.5rem;
       }
+      i {
+        color: $secondary-color;
+        margin-left: 0.5rem;
+      }
+      span {
+        color: $primary-color;
+      }
     }
   }
 }
@@ -68,9 +75,6 @@ h1 {
 
 // Account profile
 #account-profile {
-  &.section{
-    height: 1000px;
-  }
   .profile-img {
     display: block;
     margin: 2rem auto 0;
@@ -78,6 +82,12 @@ h1 {
   .account-header {
     display: block;
     text-align: center;
+  }
+  .collection-item {
+    justify-content: flex-start;
+    span {
+      font-weight: 700;
+    }
   }
 }
 

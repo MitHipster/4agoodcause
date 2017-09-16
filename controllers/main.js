@@ -42,7 +42,7 @@ router.get('/signup_error', (req, res) => {
 
 // Route to create flash signup message
 router.get('/signup_success', (req, res) => {
-  req.flash('success', "Donation complete! Thank you for you contribution. This is your personal home page you'll return to each time you log in.");
+  req.flash('success', "Donation complete! Thank you for you contribution. This is your personal home page you'll return to each time you visit.");
   res.redirect('/account');
 });
 
@@ -66,7 +66,6 @@ router.get('/signin_error', (req, res) => {
 
 // Route to redirect donor to select categories after signing up
 router.get('/categories', isLoggedIn, (req, res) => {
-// router.get('/categories', (req, res) => {
   db.Category.findAll({
     order: [
       [ 'categoryName', 'ASC' ]
@@ -83,7 +82,6 @@ router.get('/categories', isLoggedIn, (req, res) => {
 
 // Route to display a filtered charities list based on selected categories
 router.get('/charities', isLoggedIn, (req, res) => {
-// router.get('/charities', (req, res) => {
   db.Category.findAll({
     include: [
     { model: db.Charity, include: [db.Cause] }
@@ -106,7 +104,6 @@ router.get('/charities', isLoggedIn, (req, res) => {
 
 // Route to display selected charities and payment form
 router.get('/donations', isLoggedIn, (req, res) => {
-// router.get('/donations', (req, res) => {
   db.Charity.findAll({
     where: { id: charityIds },
     order: [

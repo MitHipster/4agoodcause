@@ -26,6 +26,7 @@
 
 .collapsible-body {
   display: none;
+  background-color: lighten(#908282, 35%); // New line
   border-bottom: 1px solid $collapsible-border-color;
   box-sizing: border-box;
   padding: 2rem;
