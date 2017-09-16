@@ -7,6 +7,10 @@ $(document).ready(function () {
   });
   // Initialize parallax effect
   $('.parallax').parallax();
+  // Initialize table of contents structure
+  $('.scrollspy').scrollSpy({
+    scrollOffset:0
+  });
   // Initialize select state dropdown
   $('select').material_select();
   // for HTML5 "required" attribute

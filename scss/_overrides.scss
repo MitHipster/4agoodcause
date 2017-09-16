@@ -66,6 +66,21 @@ h1 {
   margin-bottom: 4rem;
 }
 
+// Account profile
+#account-profile {
+  &.section{
+    height: 1000px;
+  }
+  .profile-img {
+    display: block;
+    margin: 2rem auto 0;
+  }
+  .account-header {
+    display: block;
+    text-align: center;
+  }
+}
+
 // Category image
 .category-img {
   width: 32px;

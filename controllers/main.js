@@ -128,7 +128,12 @@ router.get('/account', isLoggedIn, (req, res) => {
   // });
   // console.log(req.user);
   // res.render('account', { content: {user: req.user} });
-  res.render('account');
+  res.render('account', {
+    content: {
+      account: req.user,
+      user: req.user
+    }
+  });
 });
 
 // Route to logout the donor

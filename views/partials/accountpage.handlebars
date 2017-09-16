@@ -1,3 +1,38 @@
-<main>
+<main class="container containers">
+  <div class="row">
+    <div class="col s12 m9 l10">
+      <div id="account-profile" class="section scrollspy">
+        <ul class="collection with-header">
+          <img src="{{account.profileImg}}" alt="" class="circle profile-img">
+          <li class="collection-header account-header"><h4>{{account.nameFirst}} {{account.nameLast}}</h4></li>
+          <li class="collection-item">Street: {{account.locationStreet}}</li>
+          <li class="collection-item">City: {{account.locationCity}}</li>
+          <li class="collection-item">State: {{account.StateAbbrev}}</li>
+          <li class="collection-item">Zip Code: {{account.locationZip}}</li>
+          <li class="collection-item">Phone: {{account.phone}}</li>
+          <li class="collection-item">Email: {{account.email}}</li>
+        </ul>
+      </div>
 
+      <div id="account-joined" class="section scrollspy">
+
+      </div>
+
+      <div id="account-charities" class="section scrollspy">
+
+      </div>
+
+      <div id="account-history" class="section scrollspy">
+
+      </div>
+    </div>
+    <div class="col hide-on-small-only m3 l2">
+      <ul class="section table-of-contents">
+        <li><a href="#account-profile">Profile</a></li>
+        <li><a href="#account-joined">Joined</a></li>
+        <li><a href="#account-charities">Charities</a></li>
+        <li><a href="#account-history">History</a></li>
+      </ul>
+    </div>
+  </div>
 </main>
