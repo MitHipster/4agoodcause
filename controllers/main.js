@@ -8,8 +8,7 @@ const db = require('../models');
 const router = express.Router();
 // Use request method to get API data to pipe to response
 const request = require('request');
-let categoryIds = [];
-let charityIds = [];
+let arrayIds = [];
 
 // Function to check if a donor is logged in
 let isLoggedIn = (req, res, next) => {
@@ -42,7 +41,7 @@ router.get('/signup_error', (req, res) => {
 
 // Route to create flash signup message
 router.get('/signup_success', (req, res) => {
-  req.flash('success', "Donation complete! Thank you for you contribution. This is your personal home page you'll return to each time you visit.");
+  req.flash('success', "Donation complete! Thank you for your contribution. This is your personal home page you'll return to each time you visit.");
   res.redirect('/account');
 });
 
@@ -86,7 +85,7 @@ router.get('/charities', isLoggedIn, (req, res) => {
     include: [
     { model: db.Charity, include: [db.Cause] }
   ],
-    where: { id: categoryIds },
+    where: { id: arrayIds },
     order: [
       [ 'categoryName', 'ASC' ],
       [ {model: db.Charity}, 'charityName', 'ASC' ]
@@ -98,14 +97,14 @@ router.get('/charities', isLoggedIn, (req, res) => {
         user: req.user
       }
     });
-    categoryIds = [];
+    arrayIds = [];
   });
 });
 
 // Route to display selected charities and payment form
 router.get('/donations', isLoggedIn, (req, res) => {
   db.Charity.findAll({
-    where: { id: charityIds },
+    where: { id: arrayIds },
     order: [
       [ 'charityName', 'ASC' ]
     ]
@@ -116,7 +115,7 @@ router.get('/donations', isLoggedIn, (req, res) => {
         user: req.user
       }
     });
-    charityIds = [];
+    arrayIds = [];
   });
 });
 
@@ -147,12 +146,12 @@ router.get('/logout', (req, res) => {
 // ********* STORE IDS IN TEMPORARY TABLE INSTEAD OF GLOBAL VARIABLES *********
 
 router.post('/api/charities', (req, res) => {
-  categoryIds = req.body.ids.map(Number);
+  arrayIds = req.body.ids.map(Number);
   res.send({redirect: '/charities'});
 });
 
 router.post('/api/donations', (req, res) => {
-  charityIds = req.body.ids.map(Number);
+  arrayIds = req.body.ids.map(Number);
   res.send({redirect: '/donations'});
 });
 
