@@ -1,13 +1,15 @@
 /*jslint esversion: 6, browser: true*/
 const express = require('express');
+const sequelize = require('sequelize');
 const passport = require('passport');
+const moment = require('moment');
 // Import database model
 const db = require('../models');
 
 // Create the `router` for the app and export the `router` at the end of your file.
 const router = express.Router();
-// Use request method to get API data to pipe to response
-const request = require('request');
+
+// Store Ids from categories and charities api post routes
 let arrayIds = [];
 
 // Function to check if a donor is logged in
@@ -16,7 +18,7 @@ let isLoggedIn = (req, res, next) => {
   res.redirect('/signin');
 };
 
-// Route to get all 4-star causes for donor to choose from
+// Route to home page
 router.get('/', (req, res) => {
   res.render('index', { content: {user: req.user} });
 });
@@ -69,7 +71,7 @@ router.get('/categories', isLoggedIn, (req, res) => {
     order: [
       [ 'categoryName', 'ASC' ]
     ]
-  }).then (results => {
+  }).then(results => {
     res.render('categories', {
       content: {
         categories: results,
@@ -90,7 +92,7 @@ router.get('/charities', isLoggedIn, (req, res) => {
       [ 'categoryName', 'ASC' ],
       [ {model: db.Charity}, 'charityName', 'ASC' ]
     ]
-  }).then (results => {
+  }).then(results => {
     res.render('charities', {
       content: {
         charities: results,
@@ -108,7 +110,7 @@ router.get('/donations', isLoggedIn, (req, res) => {
     order: [
       [ 'charityName', 'ASC' ]
     ]
-  }).then (results => {
+  }).then(results => {
     res.render('donations', {
       content: {
         donations: results,
@@ -121,14 +123,48 @@ router.get('/donations', isLoggedIn, (req, res) => {
 
 // Route to display user profile information
 router.get('/account', isLoggedIn, (req, res) => {
-  res.render('account', {
-    content: {
-      account: {
-        profile: req.user,
-        message: req.flash('success')
-      },
-      user: req.user,
-    }
+  let content = {};
+  // Assign flash message
+  content.message = req.flash('success');
+  // Retrieve donor information
+  db.Donor.findOne({
+    include: [{
+      model: db.State
+    }, {
+      model: db.Donation,
+      include: [{
+        model: db.Charity,
+        include: [{
+          model: db.Category
+        }, {
+          model: db.Cause
+        }]
+      }]
+    }],
+    where: { id: req.user.id }
+  }).then(results => {
+    content.account = results;
+    // Retrieve donor transactions
+    db.Transaction.findAll({
+      attributes: [
+        'createdAt', [sequelize.fn('SUM', sequelize.col('amount')), 'amt']
+      ],
+      where: { DonorId: req.user.id },
+      group: ['createdAt'],
+      order: [
+        ['createdAt', 'DESC']
+      ]
+    }).then(results => {
+      content.transactions = results;
+      // Sum total donations
+      let donated = 0;
+      results.forEach( result => {
+        donated += parseFloat(result.dataValues.amt);
+      });
+      content.donated = donated;
+      console.log(JSON.stringify(content, null, 2));
+      res.render('account', content);
+    });
   });
 });
 
@@ -142,8 +178,6 @@ router.get('/logout', (req, res) => {
 //*************************************************
 // API Routes
 //*************************************************
-
-// ********* STORE IDS IN TEMPORARY TABLE INSTEAD OF GLOBAL VARIABLES *********
 
 router.post('/api/charities', (req, res) => {
   arrayIds = req.body.ids.map(Number);
@@ -179,7 +213,7 @@ router.post('/api/payments', (req, res) => {
     });
     // Bulk insert donations into Donations table
     db.Donation.bulkCreate(donations).then( () => {
-      db.Transaction.bulkCreate(donations).then ( () => {
+      db.Transaction.bulkCreate(donations).then( () => {
         res.redirect('/signup_success');
       });
     });

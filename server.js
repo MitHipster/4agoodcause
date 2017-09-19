@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers/main.js');
-// const auth = require('./controllers/passport.js');
+const moment = require('moment');
 
 // Set port environment variable port if deployed or 3000 if local
 const port = process.env.PORT || 3000;
@@ -34,8 +34,22 @@ app.use(passport.session()); // persistent login sessions
 // Override AJAX POST method if '?_method=' is used in action attribute
 app.use(methodOverride('_method'));
 
+// Define and register handlebar helper functions
+let hbs = exphbs.create({
+  helpers: {
+    dateFormat: value => {
+      return moment(value).format('MMMM Do, YYYY');
+    },
+    currencyFormat: value => {
+      console.log(value);
+      return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+    }
+  },
+  defaultLayout: 'main'
+});
+
 // Add handlebars engine to express middleware
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Open site at root

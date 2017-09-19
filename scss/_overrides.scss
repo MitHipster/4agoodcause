@@ -9,6 +9,7 @@ main {
   flex: 1 0 auto;
 }
 
+// Basic elements
 h1 {
   @media #{$small-and-down} { font-size: 3rem; }
 }
@@ -71,22 +72,60 @@ h1 {
 .containers {
   margin-top: 4rem;
   margin-bottom: 4rem;
+  @media #{$small-and-down} {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 // Account profile
-#account-profile {
-  .profile-img {
-    display: block;
-    margin: 2rem auto 0;
-  }
-  .account-header {
+#account-profile, #account-joined, #account-charities {
+  .collection-header {
     display: block;
     text-align: center;
+    .profile-img {
+      display: block;
+      margin: 2rem auto 0;
+    }
+    .valign-wrapper {
+      justify-content: center;;
+    }
+    i {
+      font-size: inherit;
+      margin-right: 0.5rem;
+    }
   }
   .collection-item {
-    justify-content: flex-start;
-    span {
+    display: block;
+    padding-left: 20px !important;
+    @media #{$medium-and-up} { font-size: 1.15rem; }
+    .item-title {
       font-weight: 700;
+      margin-bottom: 0;
+      & + p {
+        font-size: 1.1rem;
+        margin-top: 0;
+        @media #{$medium-and-up} { font-size: 1.25rem; }
+      }
+    }
+  }
+}
+
+#account-charities {
+  .collection-item {
+    font-size: 1.1rem;
+    @media #{$medium-and-up} { font-size: 1.25rem; }
+    .item-title {
+      font-weight: 700;
+      margin-bottom: 0;
+      & ~ p {
+        margin-top: 0;
+        font-size: 1rem;
+        @media #{$medium-and-up} { font-size: 1.15rem; }
+      }
+      & + p {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -98,7 +137,7 @@ h1 {
   margin-right: 0.75rem;
 }
 
-// Collapsible
+// Collapsible categories
 .collapsible {
   .collapsible-header {
     display: flex;
@@ -115,7 +154,7 @@ h1 {
   }
 }
 
-// Collection
+// Collection charities
 .collection {
   .collection-header {
     display: flex;

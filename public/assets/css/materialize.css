@@ -5271,17 +5271,54 @@ main {
 .containers {
   margin-top: 4rem;
   margin-bottom: 4rem; }
+  @media only screen and (max-width: 600px) {
+    .containers {
+      margin-top: 2rem;
+      margin-bottom: 2rem; } }
 
-#account-profile .profile-img {
-  display: block;
-  margin: 2rem auto 0; }
-#account-profile .account-header {
+#account-profile .collection-header, #account-joined .collection-header, #account-charities .collection-header {
   display: block;
   text-align: center; }
-#account-profile .collection-item {
-  justify-content: flex-start; }
-  #account-profile .collection-item span {
-    font-weight: 700; }
+  #account-profile .collection-header .profile-img, #account-joined .collection-header .profile-img, #account-charities .collection-header .profile-img {
+    display: block;
+    margin: 2rem auto 0; }
+  #account-profile .collection-header .valign-wrapper, #account-joined .collection-header .valign-wrapper, #account-charities .collection-header .valign-wrapper {
+    justify-content: center; }
+  #account-profile .collection-header i, #account-joined .collection-header i, #account-charities .collection-header i {
+    font-size: inherit;
+    margin-right: 0.5rem; }
+#account-profile .collection-item, #account-joined .collection-item, #account-charities .collection-item {
+  display: block;
+  padding-left: 20px !important; }
+  @media only screen and (min-width: 601px) {
+    #account-profile .collection-item, #account-joined .collection-item, #account-charities .collection-item {
+      font-size: 1.15rem; } }
+  #account-profile .collection-item .item-title, #account-joined .collection-item .item-title, #account-charities .collection-item .item-title {
+    font-weight: 700;
+    margin-bottom: 0; }
+    #account-profile .collection-item .item-title + p, #account-joined .collection-item .item-title + p, #account-charities .collection-item .item-title + p {
+      font-size: 1.1rem;
+      margin-top: 0; }
+      @media only screen and (min-width: 601px) {
+        #account-profile .collection-item .item-title + p, #account-joined .collection-item .item-title + p, #account-charities .collection-item .item-title + p {
+          font-size: 1.25rem; } }
+
+#account-charities .collection-item {
+  font-size: 1.1rem; }
+  @media only screen and (min-width: 601px) {
+    #account-charities .collection-item {
+      font-size: 1.25rem; } }
+  #account-charities .collection-item .item-title {
+    font-weight: 700;
+    margin-bottom: 0; }
+    #account-charities .collection-item .item-title ~ p {
+      margin-top: 0;
+      font-size: 1rem; }
+      @media only screen and (min-width: 601px) {
+        #account-charities .collection-item .item-title ~ p {
+          font-size: 1.15rem; } }
+    #account-charities .collection-item .item-title + p {
+      margin-bottom: 0; }
 
 .category-img {
   width: 32px;
