@@ -145,21 +145,29 @@ router.get('/account', isLoggedIn, (req, res) => {
   }).then(results => {
     content.account = results;
     // Retrieve donor transactions
-    db.Transaction.findAll({
+    db.Payment.findAll({
       attributes: [
-        'createdAt', [sequelize.fn('SUM', sequelize.col('amount')), 'amt']
+        [ sequelize.col('Transactions.createdAt'), 'createdAt' ], 'cardName', [ sequelize.fn('SUM', sequelize.col('Transactions.amount')), 'amount' ]
       ],
-      where: { DonorId: req.user.id },
-      group: ['createdAt'],
+      include: [{
+        // Empty attributes array used to exclude transaction fields (i.e. only fields specified above are included)
+        model: db.Transaction, attributes: []
+      }],
+      group: [
+        [{ model: db.Transaction }, 'createdAt' ]
+      ],
       order: [
-        ['createdAt', 'DESC']
-      ]
+        [{ model: db.Transaction }, 'createdAt' , 'DESC' ]
+      ],
+      where: { id: req.user.id },
+      // Raw statement is needed to return all records instead of just first instance
+      raw: true
     }).then(results => {
       content.transactions = results;
       // Sum total donations
       let donated = 0;
-      results.forEach( result => {
-        donated += parseFloat(result.dataValues.amt);
+      content.transactions.forEach( transaction => {
+        donated += parseFloat(transaction.amount);
       });
       content.donated = donated;
       console.log(JSON.stringify(content, null, 2));

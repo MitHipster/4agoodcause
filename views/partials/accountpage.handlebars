@@ -13,7 +13,7 @@
       <div id="account-profile" class="section scrollspy">
         <ul class="collection with-header">
           <li class="collection-header">
-            <img src="{{account.profileImg}}" alt="" class="circle profile-img">
+            <img src="{{account.profileImg}}" alt="" class="profile-img">
             <h4>{{account.nameFirst}} {{account.nameLast}}</h4>
           </li>
           <li class="collection-item">
@@ -50,7 +50,7 @@
           </li>
           <li class="collection-item">
             <p class="item-title">Donating Since:</p>
-            <p>{{dateFormat account.createdAt}}</p>
+            <p>{{dateFormat account.createdAt "long"}}</p>
           </li>
           <li class="collection-item">
             <p class="item-title">Total Donated:</p>
@@ -75,7 +75,29 @@
       </div>
 
       <div id="account-history" class="section scrollspy">
-
+        <ul class="collection with-header">
+          <li class="collection-header account-header">
+            <h4 class="valign-wrapper"><i class="material-icons">monetization_on</i>History</h4>
+          </li>
+          <table>
+            <thead>
+              <tr class="collection-item row">
+                <th class="col s3">Date</th>
+                <th class="col s6">Payment Type</th>
+                <th class="col s3">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each transactions}}
+                <tr class="collection-item row">
+                  <td class="col s3">{{dateFormat this.createdAt "short"}}</td>
+                  <td class="col s6 truncate">{{cardName}}</td>
+                  <td class="col s3">${{currencyFormat amount}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </ul>
       </div>
     </div>
     <div class="col hide-on-small-only m3 l2 offset-m1 offset-l2">

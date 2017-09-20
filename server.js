@@ -37,11 +37,16 @@ app.use(methodOverride('_method'));
 // Define and register handlebar helper functions
 let hbs = exphbs.create({
   helpers: {
-    dateFormat: value => {
-      return moment(value).format('MMMM Do, YYYY');
+    dateFormat: (value, format) => {
+      if (format === "long") {
+        return moment(value).format('MMMM Do, YYYY');
+      } else {
+        return moment(value).format('MM/DD/YY');
+      }
+
     },
     currencyFormat: value => {
-      console.log(value);
+      value = parseFloat(value);
       return value.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
     }
   },

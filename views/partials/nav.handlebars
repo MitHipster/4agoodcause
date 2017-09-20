@@ -10,6 +10,7 @@
             <li><a href="/signup">Sign Up</a></li>
           {{/unless}}
           {{#if user}}
+            <li><a href="/account">Account</a></li>
             <li><a href="/logout">Logout</a></li>
           {{/if}}
         </ul>
@@ -24,6 +25,7 @@
       <li><a href="/signup"><i class="material-icons">redeem</i>Start Giving</a></li>
     {{/unless}}
     {{#if user}}
+      <li><a href="/account"><i class="material-icons">account_box</i>Account</a></li>
       <li><a href="/logout"><i class="material-icons">phonelink_off</i>Logout</a></li>
     {{/if}}
   </ul>

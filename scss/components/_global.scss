@@ -564,6 +564,7 @@ td, th{
   &.with-header {
     .collection-header {
       background-color: $collection-bg-color;
+      // background-color: lighten(#908282, 35%);
       border-bottom: 1px solid $collection-border-color;
       padding: 10px 20px;
     }

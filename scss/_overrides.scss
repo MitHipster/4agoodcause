@@ -70,22 +70,31 @@ h1 {
 
 // Container spacing
 .containers {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
   @media #{$small-and-down} {
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
 }
 
 // Account profile
-#account-profile, #account-joined, #account-charities {
+#account-profile,
+#account-joined,
+#account-charities,
+#account-history {
   .collection-header {
     display: block;
     text-align: center;
+    h4 {
+      @media #{$small-and-down} { font-size: 1.75rem; }
+    }
     .profile-img {
       display: block;
+      width: 64px;
+      height: 64px;
       margin: 2rem auto 0;
+      border-radius: 0.5rem;
     }
     .valign-wrapper {
       justify-content: center;;
@@ -127,6 +136,15 @@ h1 {
         margin-bottom: 0;
       }
     }
+  }
+}
+
+#account-history {
+  .collection {
+    max-height: 548px; // Height of section header, table header, and 10 transactions
+    overflow-y: scroll;
+    @media #{$small-and-down} { max-height: 537px; }
+    @media #{$large-and-up} { max-height: 561px; }
   }
 }
 
