@@ -170,7 +170,6 @@ router.get('/account', isLoggedIn, (req, res) => {
         donated += parseFloat(transaction.amount);
       });
       content.donated = donated;
-      console.log(JSON.stringify(content, null, 2));
       res.render('account', content);
     });
   });

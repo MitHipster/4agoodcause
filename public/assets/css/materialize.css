@@ -2332,7 +2332,7 @@ td, th {
     .collection a.collection-item:not(.active):hover {
       background-color: #ddd; }
   .collection.with-header .collection-header {
-    background-color: #fff;
+    background-color: #e4e1e1;
     border-bottom: 1px solid #e0e0e0;
     padding: 10px 20px; }
   .collection.with-header .collection-item {
@@ -5231,6 +5231,9 @@ main {
   h1 {
     font-size: 3rem; } }
 
+button {
+  margin-top: 40px; }
+
 .side-navbar-title {
   margin-left: 1.25rem; }
 
@@ -5255,6 +5258,10 @@ main {
   margin-top: 3rem; }
   .section .card .card-content p {
     font-size: 1.2rem; }
+  @media only screen and (max-width: 600px) {
+    .section .card .card-content {
+      padding-top: 0;
+      padding-bottom: 0; } }
   .section .card .card-title {
     display: flex;
     justify-content: center;
@@ -5282,21 +5289,18 @@ main {
 #account-history .collection-header {
   display: block;
   text-align: center; }
-  @media only screen and (max-width: 600px) {
-    #account-profile .collection-header h4,
-    #account-joined .collection-header h4,
-    #account-charities .collection-header h4,
-    #account-history .collection-header h4 {
-      font-size: 1.75rem; } }
-  #account-profile .collection-header .profile-img,
-  #account-joined .collection-header .profile-img,
-  #account-charities .collection-header .profile-img,
-  #account-history .collection-header .profile-img {
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 2rem auto 0;
-    border-radius: 0.5rem; }
+  #account-profile .collection-header h4,
+  #account-joined .collection-header h4,
+  #account-charities .collection-header h4,
+  #account-history .collection-header h4 {
+    margin-top: 14px;
+    margin-bottom: 14px; }
+    @media only screen and (max-width: 600px) {
+      #account-profile .collection-header h4,
+      #account-joined .collection-header h4,
+      #account-charities .collection-header h4,
+      #account-history .collection-header h4 {
+        font-size: 1.75rem; } }
   #account-profile .collection-header .valign-wrapper,
   #account-joined .collection-header .valign-wrapper,
   #account-charities .collection-header .valign-wrapper,
@@ -5320,6 +5324,12 @@ main {
     #account-charities .collection-item,
     #account-history .collection-item {
       font-size: 1.15rem; } }
+  #account-profile .collection-item p,
+  #account-joined .collection-item p,
+  #account-charities .collection-item p,
+  #account-history .collection-item p {
+    margin-top: 10px;
+    margin-bottom: 10px; }
   #account-profile .collection-item .item-title,
   #account-joined .collection-item .item-title,
   #account-charities .collection-item .item-title,
@@ -5338,6 +5348,23 @@ main {
         #account-charities .collection-item .item-title + p,
         #account-history .collection-item .item-title + p {
           font-size: 1.25rem; } }
+
+#account-profile .collection-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  padding-bottom: 24px; }
+  #account-profile .collection-header .account-name {
+    height: 64px;
+    text-align: left;
+    margin-left: 0.75rem; }
+    #account-profile .collection-header .account-name h4, #account-profile .collection-header .account-name h5 {
+      margin: 0; }
+  #account-profile .collection-header .profile-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 0.5rem; }
 
 #account-charities .collection-item {
   font-size: 1.1rem; }
@@ -5409,7 +5436,9 @@ main {
 .payment-section {
   margin-top: 4rem; }
 
-.flash-messages {
-  font-size: 1.1rem; }
+.row-messages {
+  margin-bottom: 0; }
+  .row-messages .flash-messages {
+    font-size: 1.1rem; }
 
 /*# sourceMappingURL=materialize.css.map */

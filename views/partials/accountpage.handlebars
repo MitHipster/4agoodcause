@@ -1,5 +1,5 @@
 <main class="container containers">
-  <div class="row">
+  <div class="row row-messages">
     <div class="col s12 m6 offset-m3">
       {{#if message}}
         <blockquote class="flash-messages">
@@ -14,7 +14,10 @@
         <ul class="collection with-header">
           <li class="collection-header">
             <img src="{{account.profileImg}}" alt="" class="profile-img">
-            <h4>{{account.nameFirst}} {{account.nameLast}}</h4>
+            <div class="account-name">
+              <h5>{{account.nameFirst}}</h5>
+              <h4>{{account.nameLast}}</h4>
+            </div>
           </li>
           <li class="collection-item">
             <p class="item-title">Street:</p>
