@@ -178,6 +178,19 @@ button {
   }
 }
 
+// Account page table of contents
+.pin-top {
+  position: relative;
+}
+
+.pin-bottom {
+  position: relative;
+}
+
+.pinned {
+  position: fixed !important;
+}
+
 // Category image
 .category-img {
   width: 32px;
