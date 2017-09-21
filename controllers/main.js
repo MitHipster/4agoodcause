@@ -43,7 +43,7 @@ router.get('/signup_error', (req, res) => {
 
 // Route to create flash signup message
 router.get('/signup_success', (req, res) => {
-  req.flash('success', "Donation complete! Thank you for your contribution. This is your personal home page you'll return to each time you visit.");
+  req.flash('success', "Donation complete! Thank you for your contribution. This is your personal home page.");
   res.redirect('/account');
 });
 

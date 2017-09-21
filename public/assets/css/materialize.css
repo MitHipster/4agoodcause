@@ -5231,8 +5231,11 @@ main {
   h1 {
     font-size: 3rem; } }
 
+blockquote {
+  padding: 0.5rem 0.5rem 0.5rem 1rem; }
+
 button {
-  margin-top: 40px; }
+  margin-top: 20px; }
 
 .side-navbar-title {
   margin-left: 1.25rem; }
@@ -5253,6 +5256,11 @@ button {
       @media only screen and (max-width: 600px) {
         .parallax-container .caption a {
           margin-top: 2rem; } }
+  .parallax-container blockquote {
+    background-color: rgba(68, 75, 110, 0.3); }
+  .parallax-container small {
+    display: inline-block;
+    float: right; }
 
 .section .card {
   margin-top: 3rem; }

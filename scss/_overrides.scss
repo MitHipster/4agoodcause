@@ -14,8 +14,12 @@ h1 {
   @media #{$small-and-down} { font-size: 3rem; }
 }
 
+blockquote {
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
 button {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 // Navigation
@@ -40,6 +44,13 @@ button {
       margin-top: 4rem;
       @media #{$small-and-down} { margin-top: 2rem; }
     }
+  }
+  blockquote {
+    background-color: rgba($primary-color, 0.3);
+  }
+  small {
+    display: inline-block;
+    float: right;
   }
 }
 
